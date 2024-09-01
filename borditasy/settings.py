@@ -53,6 +53,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'borditasy.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,8 +78,12 @@ WSGI_APPLICATION = 'borditasy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'borditasy',  # Replace with your database name
+        'USER': 'postgres',  # Replace with your database user
+        'PASSWORD': 'hasinjaka',  # Replace with your database password
+        'HOST': 'localhost',  # Replace with your database host, e.g., 'localhost'
+        'PORT': '5432',  # Replace with your database port, e.g., '5432'
     }
 }
 
