@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< HEAD
 from borditasyapp.views import HelloAPIView, create_produit, list_produits
 
 urlpatterns = [
@@ -25,3 +26,10 @@ urlpatterns = [
     path('api/produits/list/', list_produits, name='list_produits')
 ]
 
+=======
+from borditasyapp.views import HelloAPIView
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('hello/', HelloAPIView.as_view(), name='hello')
+]
+>>>>>>> 58a0b4f8e34fd47538df1d89ddcb15800d230c6a
