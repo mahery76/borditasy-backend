@@ -82,19 +82,11 @@ WSGI_APPLICATION = 'borditasy.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-<<<<<<< HEAD
-        'NAME': 'borditasydb',
-        'USER': 'postgres',
-        'PASSWORD': 'borditasybd',
-        'HOST': 'localhost',
-        'PORT': '5432',
-=======
         'NAME': 'borditasy',  # Replace with your database name
         'USER': 'postgres',  # Replace with your database user
         'PASSWORD': 'hasinjaka',  # Replace with your database password
         'HOST': 'localhost',  # Replace with your database host, e.g., 'localhost'
         'PORT': '5432',  # Replace with your database port, e.g., '5432'
->>>>>>> 58a0b4f8e34fd47538df1d89ddcb15800d230c6a
     }
 }
 
