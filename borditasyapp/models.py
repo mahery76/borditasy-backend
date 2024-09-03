@@ -2,7 +2,7 @@ from django.db import models
 
 class Produit(models.Model):
     nom_produit = models.CharField(max_length=255)
-    date_produit = models.DateField()
+    quantite_minimum = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.nom_produit
@@ -36,8 +36,6 @@ class Commande(models.Model):
     facture = models.ForeignKey(Facture, on_delete=models.DO_NOTHING)
     produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING)
 
-    def __str__(self):
-        return self.id_commande
 
 
         

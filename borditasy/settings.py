@@ -53,10 +53,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'borditasy.urls'
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 58a0b4f8e34fd47538df1d89ddcb15800d230c6a
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -130,8 +126,4 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-<<<<<<< HEAD
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-=======
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
->>>>>>> 58a0b4f8e34fd47538df1d89ddcb15800d230c6a
