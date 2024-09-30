@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_%@p^v-3t7wtjsxrlo1*i5!-t&knbn2sm*0bbd+gela&66r0sw
 DEBUG = True
 
 # Allow all hosts (not recommended for production)
-ALLOWED_HOSTS = ['192.168.88.2','127.0.0.1']
+ALLOWED_HOSTS = ['192.168.88.2','127.0.0.1','localhost']
 
 
 # Application definition
@@ -75,8 +75,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'borditasy.wsgi.application'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
     "http://192.168.88.154:3000",
     
     # Add other origins as needed
