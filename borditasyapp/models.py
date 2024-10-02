@@ -11,8 +11,8 @@ class Stock(models.Model):
     designation_depense = models.CharField(max_length=255)
     quantite_stock = models.FloatField()
     prix_achat_dep = models.FloatField()
-    prix_vente = models.FloatField()
-    produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING)
+    prix_vente = models.FloatField(null=True, blank=True)  
+    produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING, null=True, blank=True)  
 
     def __str__(self):
         return self.designation_depense

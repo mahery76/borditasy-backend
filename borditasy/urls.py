@@ -16,12 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from borditasyapp.views import HelloAPIView, create_produit, list_produits
+# from borditasyapp.views import HelloAPIView, create_produit, list_produits
+from borditasyapp.views.produitViews import create_produit, list_produits
+from borditasyapp.views.stockViews import create_stock, list_stock
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/', HelloAPIView.as_view(), name='hello'),
     path('api/produits/', create_produit, name='create_produit'),
-    path('api/produits/list/', list_produits, name='list_produits')
+    path('api/produits/list/', list_produits, name='list_produits'),
+    path('api/stocks/', create_stock, name='create_stock'),
+    path('api/stocks/list', list_stock, name='list_stocks'),
 ]
+
+
+
 
