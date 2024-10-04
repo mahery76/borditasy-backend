@@ -19,13 +19,16 @@ from django.urls import path
 # from borditasyapp.views import HelloAPIView, create_produit, list_produits
 from borditasyapp.views.produitViews import create_produit, list_produits
 from borditasyapp.views.stockViews import create_stock, list_stock
+from borditasyapp.views.depenseViews import create_depense, list_depense
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/produits/', create_produit, name='create_produit'),
     path('api/produits/list/', list_produits, name='list_produits'),
     path('api/stocks/', create_stock, name='create_stock'),
-    path('api/stocks/list', list_stock, name='list_stocks'),
+    path('api/stocks/list/', list_stock, name='list_stocks'),
+    path('api/depenses/', create_depense, name='create_depense'),
+    path('api/depenses/list', list_depense, name='list_depenses'),
 ]
 
 
