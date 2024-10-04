@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Produit(models.Model):
     nom_produit = models.CharField(max_length=255)
@@ -24,10 +25,12 @@ class PrixProduit(models.Model):
 
     def __str__(self):
         return self.prix_produit
+from django.utils import timezone
 
 class Facture(models.Model):
     est_payee = models.BooleanField()
-
+    date_facture = models.DateTimeField(default=timezone.now)
+    
     def __str__(self):
         return self.est_payee
 

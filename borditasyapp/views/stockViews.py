@@ -2,7 +2,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from borditasyapp.models import Stock
-from borditasyapp.serializers import StockSerializer
+from borditasyapp.serializers import StockSerializer, StockListSerializer
 
 @api_view(['POST'])
 def create_stock(request):
@@ -18,7 +18,7 @@ def create_stock(request):
 def list_stock(request):
     if request.method == 'GET':
         stocks = Stock.objects.all()
-        serializer = StockSerializer(stocks, many=True)
+        serializer = StockListSerializer(stocks, many=True)
         return Response(serializer.data) 
 
 
