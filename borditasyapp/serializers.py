@@ -7,8 +7,17 @@ class ProduitSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class StockSerializer(serializers.ModelSerializer):
+    produit = serializers.PrimaryKeyRelatedField(queryset=Produit.objects.all(), required=False)
+
+    class Meta:
+        model = Stock
+        fields = '__all__'
+
+
+class StockListSerializer(serializers.ModelSerializer):
     produit = ProduitSerializer(allow_null=True)
 
     class Meta:
         model = Stock
         fields = '__all__'
+
