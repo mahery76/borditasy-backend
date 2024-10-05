@@ -31,8 +31,6 @@ class Facture(models.Model):
     est_payee = models.BooleanField()
     date_facture = models.DateTimeField(default=timezone.now)
     
-    def __str__(self):
-        return self.est_payee
 
 class Commande(models.Model):
     qte_produit = models.FloatField()
