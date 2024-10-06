@@ -12,7 +12,7 @@ def create_commande(request):
             if facture_serializer.is_valid():
                 saved_facture = facture_serializer.save()
                 facture_id = saved_facture.id
-                commandes_data = request.data.get('commandes', [])
+                commandes_data = facture_data["commandes"] 
                 for commande_data in commandes_data:
                     commande_data["facture"]=facture_id
                     commande_serializer = CommandeFormSerializer(data=commande_data)
@@ -20,10 +20,12 @@ def create_commande(request):
                         commande_serializer.save()
                     else:
                         return Response(commande_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response(facture_serializer.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(facture_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        
-        return Response(facture_serializer.data, status=status.HTTP_201_CREATED)
+    
+        else:
+            return Response({'error': 'Facture data not found'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def list_facture_with_commandes(request, id):
