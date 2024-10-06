@@ -17,7 +17,7 @@ def create_depense(request):
 @api_view(['GET'])
 def list_depense(request):
     if request.method == 'GET':
-        stocks = Stock.objects.all()
+        stocks = Stock.objects.filter(prix_vente__isnull=True)
         serializer = DepenseListSerializer(stocks, many=True)
         return Response(serializer.data) 
 

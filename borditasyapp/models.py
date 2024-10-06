@@ -9,7 +9,7 @@ class Produit(models.Model):
         return self.nom_produit
 
 class Stock(models.Model):
-    designation_depense = models.CharField(max_length=255)
+    designation_depense = models.CharField(max_length=255, null=True, blank=True)
     quantite_stock = models.FloatField(null=True, blank=True)
     prix_achat_dep = models.FloatField()
     prix_vente = models.FloatField(null=True, blank=True)  

@@ -17,7 +17,7 @@ def create_stock(request):
 @api_view(['GET'])
 def list_stock(request):
     if request.method == 'GET':
-        stocks = Stock.objects.all()
+        stocks = Stock.objects.filter(prix_vente__isnull=False)
         serializer = StockListSerializer(stocks, many=True)
         return Response(serializer.data) 
 
