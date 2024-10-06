@@ -1,0 +1,13 @@
+@host = http://localhost/
+@port = 8000
+@borditasy_api_HostAddress = {{host}}:{{port}}
+
+GET {{borditasy_api_HostAddress}}/api/weatherforecast/example
+
+###
+
+POST {{borditasy_api_HostAddress}}/api/stock/
+Content-Type: application/x-www-form-urlencoded
+
+designation_depense=Example+Designation&quantite_stock=100.0&prix_achat_dep=50.0&prix_vente=75.0&produit=1
+

@@ -19,7 +19,23 @@ class StockListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stock
-        fields = '__all__'
+        fields = ['quantite_stock', 'prix_achat_dep', 'prix_vente', 'produit']
+
+class DepenseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = ['designation_depense', 'quantite_stock', 'prix_achat_dep']
+    
+class DepenseListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Stock
+        fields = ['designation_depense', 'quantite_stock', 'prix_achat_dep']
+
+
+
+
+
+
 
 
 class CommandeFormSerializer(serializers.ModelSerializer):

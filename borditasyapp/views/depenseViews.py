@@ -2,12 +2,12 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import api_view
 from borditasyapp.models import Stock
-from borditasyapp.serializers import StockSerializer, StockListSerializer
+from borditasyapp.serializers import DepenseSerializer, DepenseListSerializer
 
 @api_view(['POST'])
-def create_stock(request):
+def create_depense(request):
     if request.method == 'POST':
-        serializer = StockSerializer(data=request.data)
+        serializer = DepenseSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -15,10 +15,10 @@ def create_stock(request):
 
 
 @api_view(['GET'])
-def list_stock(request):
+def list_depense(request):
     if request.method == 'GET':
-        stocks = Stock.objects.filter(prix_vente__isnull=False)
-        serializer = StockListSerializer(stocks, many=True)
+        stocks = Stock.objects.filter(prix_vente__isnull=True)
+        serializer = DepenseListSerializer(stocks, many=True)
         return Response(serializer.data) 
 
 
