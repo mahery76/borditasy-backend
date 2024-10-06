@@ -14,25 +14,14 @@ class Stock(models.Model):
     prix_achat_dep = models.FloatField()
     prix_vente = models.FloatField(null=True, blank=True)  
     produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING, null=True, blank=True)  
-    
+    date_stock= models.DateField(auto_now=True)
     def __str__(self):
         return self.designation_depense
-
-class PrixProduit(models.Model):
-    prix_produit = models.FloatField()
-    date_prix_produit = models.DateField()
-    produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return self.prix_produit
-from django.utils import timezone
 
 class Facture(models.Model):
     est_payee = models.BooleanField()
     date_facture = models.DateTimeField(default=timezone.now)
     
-    def __str__(self):
-        return self.est_payee
 
 class Commande(models.Model):
     qte_produit = models.FloatField()
