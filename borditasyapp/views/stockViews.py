@@ -32,7 +32,8 @@ def list_stock(request):
                     swr.produit_id as produit, 
                     swr.remaining_stock as quantite_stock,
                     pwap.prix_vente,
-                    pwap.nom_produit  
+                    pwap.nom_produit,
+                    pwap.prix_achat_dep
                 FROM stock_with_remaining swr 
                 JOIN ProductWithActualPrice pwap on swr.produit_id=pwap.id
                 """)
@@ -44,6 +45,7 @@ def list_stock(request):
                 stock = {
                     "quantite_stock": row[1],  # Accessing by index
                     "prix_vente": row[2],  # Accessing by index
+                    "prix_achat_dep": row[4],  # Accessing by index
                     "produit": {
                         "id": row[0],  # Adjust this if you have more fields
                         "nom_produit": row[3],  # Adjust this if you have more fields
