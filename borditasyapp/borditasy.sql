@@ -1,14 +1,39 @@
-CREATE VIEW prix_produit AS
-SELECT p.*, pp.prix_produit
-FROM Produit p
-JOIN (
-    SELECT produit_id, prix_produit, MAX(date_prix_produit) AS latest_date
-    FROM PrixProduit
-    GROUP BY produit_id, prix_produit
-) pp
-ON p.id = pp.produit_id
-AND pp.date_prix_produit = (
-    SELECT MAX(date_prix_produit)
-    FROM PrixProduit
-    WHERE produit_id = p.id
-);
+CREATE VIEW list_stock AS
+            SELECT * FROM 
+                borditasyapp_stock s
+            WHERE prix_vente is not null;
+
+
+CREATE VIEW list_depense AS
+            SELECT * FROM 
+                borditasyapp_stock s
+            WHERE prix_vente is null;
+
+
+CREATE OR REPLACE VIEW ProductWithActualPrice AS
+            SELECT p.id, p.nom_produit, s.prix_vente
+            FROM borditasyapp_Produit p
+            JOIN (
+                SELECT produit_id, prix_vente
+                FROM borditasyapp_Stock s1
+                WHERE date_stock = (
+                    SELECT MAX(date_stock)
+                    FROM borditasyapp_Stock s2
+                    WHERE s1.produit_id = s2.produit_id
+                )
+            ) s
+            ON p.id = s.produit_id ORDER BY p.nom_produit;
+
+CREATE VIEW stock_with_remaining AS
+            SELECT 
+                s.produit_id,
+                COALESCE(s.total_stock, 0) - COALESCE(c.total_commande, 0) AS remaining_stock
+            FROM 
+                (SELECT produit_id, SUM(quantite_stock) AS total_stock
+                FROM list_stock
+                GROUP BY produit_id) s
+            LEFT JOIN 
+                (SELECT produit_id, SUM(qte_produit) AS total_commande
+                FROM borditasyapp_commande
+                GROUP BY produit_id) c
+            ON s.produit_id = c.produit_id;

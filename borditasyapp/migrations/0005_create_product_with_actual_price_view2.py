@@ -17,11 +17,15 @@ class Migration(migrations.Migration):
             SELECT p.id, p.nom_produit, s.prix_vente
             FROM borditasyapp_Produit p
             JOIN (
-                SELECT produit_id, prix_vente, MAX(date_stock) AS latest_date
-                FROM borditasyapp_Stock
-                GROUP BY produit_id, prix_vente
+                SELECT produit_id, prix_vente
+                FROM borditasyapp_Stock s1
+                WHERE date_stock = (
+                    SELECT MAX(date_stock)
+                    FROM borditasyapp_Stock s2
+                    WHERE s1.produit_id = s2.produit_id
+                )
             ) s
-            ON p.id = s.produit_id order by p.nom_produit;
+            ON p.id = s.produit_id ORDER BY p.nom_produit;
             """,
             reverse_sql="DROP VIEW IF EXISTS ProductWithActualPrice;"
         ),
