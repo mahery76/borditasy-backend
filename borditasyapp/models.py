@@ -11,10 +11,10 @@ class Produit(models.Model):
 class Stock(models.Model):
     designation_depense = models.CharField(max_length=255, null=True, blank=True)
     quantite_stock = models.FloatField(null=True, blank=True)
-    prix_achat_dep = models.FloatField()
+    prix_achat_dep = models.FloatField(null=False)
     prix_vente = models.FloatField(null=True, blank=True)  
     produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING, null=True, blank=True)  
-    date_stock= models.DateField(auto_now=True)
+    date_stock= models.DateTimeField(default=timezone.now)
     def __str__(self):
         return self.designation_depense
 
