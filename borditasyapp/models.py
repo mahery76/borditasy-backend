@@ -42,4 +42,8 @@ class User(AbstractUser):
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
+    
+        # .object not found fixed when adding 'rest_framework.authtoken' to installed app
         Token.objects.create(user=instance)
+
+        # integrity erro when deleting a user from django admin
