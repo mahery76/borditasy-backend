@@ -19,9 +19,7 @@ from django.urls import path
 # from borditasyapp.views import HelloAPIView, create_produit, list_produits
 from borditasyapp.views.produitViews import create_produit, list_produits,list_produits_with_price
 from borditasyapp.views.stockViews import create_stock, list_stock
-
 from borditasyapp.views.depenseViews import create_depense, list_depense
-
 from borditasyapp.views.commandeViews import create_commande, list_facture_with_commandes
 urlpatterns = [
     path('admin/', admin.site.urls),
