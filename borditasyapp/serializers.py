@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Produit, Stock, Commande, Facture
-
+from .models import Produit, Stock, Commande, Facture, User
 class ProduitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produit
@@ -32,12 +31,6 @@ class DepenseListSerializer(serializers.ModelSerializer):
         fields = ['designation_depense', 'quantite_stock', 'prix_achat_dep']
 
 
-
-
-
-
-
-
 class CommandeFormSerializer(serializers.ModelSerializer):
     facture = serializers.PrimaryKeyRelatedField(queryset=Facture.objects.all(),required=False)
     produit = serializers.PrimaryKeyRelatedField(queryset=Produit.objects.all(),required=False)
@@ -55,4 +48,12 @@ class CommandeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commande
         fields = ["id","produit","qte_produit"]
+
+
+class GetUserTokenSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = User
+        # fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'profile_pic')
+        fields = ('username', 'password')
+        read_only_fields = ('username',)
 
