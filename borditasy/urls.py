@@ -28,7 +28,7 @@ from borditasyapp.views.depenseViews import create_depense, list_depense
 from borditasyapp.views.commandeViews import create_commande, list_facture_with_commandes
 
 # for the users login 
-from borditasyapp.views.userViews import UserViewSet, UserLogIn
+from borditasyapp.views.userViews import UserViewSet, UserLogIn, VerifyTokenView
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 
@@ -45,12 +45,12 @@ urlpatterns = [
     path('api/factures/<int:id>', list_facture_with_commandes, name='liste_facture'),
     path('api/v1/', include(router.urls)),
     path('api-user-login/', UserLogIn.as_view()),
+    path('api-verify-token/', VerifyTokenView.as_view(), name='api_verify_token'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False)),
+    re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False))
 ] 
-
-# Ensure urlpatterns is a list before concatenation
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if this part is included, it return 404 not found in each request
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

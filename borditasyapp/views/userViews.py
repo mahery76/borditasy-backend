@@ -46,5 +46,11 @@ class UserLogIn(ObtainAuthToken):
             'id': user.id,
             'username': user.username
         })
-        
 
+
+class VerifyTokenView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # If the user is authenticated, the token is valid
+        return Response({'valid': True, 'user_id': request.user.id, 'username': request.user.username})
