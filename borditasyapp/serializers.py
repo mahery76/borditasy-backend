@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Produit, Stock, Commande, Facture, User
+
 class ProduitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Produit
@@ -53,7 +54,20 @@ class CommandeListSerializer(serializers.ModelSerializer):
 class GetUserTokenSerializer(serializers.ModelSerializer):
     class Meta: 
         model = User
-        # fields = ('id', 'username', 'first_name', 'last_name', 'bio', 'profile_pic')
-        fields = ('username', 'password')
-        read_only_fields = ('username',)
+        fields = ['username', 'email', 'password', 'first_name', 'last_name', 'is_superuser', 'bio']
+
+
+class CreateUserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)  # We don't want to return passwords in the response
+    is_superuser = serializers.BooleanField(default=False)
+    bio = serializers.CharField(required=False, allow_blank=True, allow_null=True)  # Allow bio to be optional
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'first_name', 'last_name', 'is_superuser', 'bio']
+
+class GetAllUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password', 'first_name', 'last_name', 'is_superuser', 'bio']
 

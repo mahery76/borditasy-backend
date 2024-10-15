@@ -28,7 +28,7 @@ from borditasyapp.views.depenseViews import create_depense, list_depense
 from borditasyapp.views.commandeViews import create_commande, list_facture_with_commandes
 
 # for the users login 
-from borditasyapp.views.userViews import UserViewSet, UserLogIn, VerifyTokenView
+from borditasyapp.views.userViews import UserViewSet, UserLogIn, VerifyTokenView, CreateUserView, GetAllUsers
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 
@@ -44,8 +44,10 @@ urlpatterns = [
     path('api/commandes/', create_commande, name='create_commande'),
     path('api/factures/<int:id>', list_facture_with_commandes, name='liste_facture'),
     path('api/v1/', include(router.urls)),
-    path('api-user-login/', UserLogIn.as_view()),
+    path('api-user-login/', UserLogIn.as_view(), name='api_get_user_info'),
     path('api-verify-token/', VerifyTokenView.as_view(), name='api_verify_token'),
+    path('api-create-user/', CreateUserView.as_view(), name='api_create_user'),
+    path('api-get-all-users/', GetAllUsers.as_view(), name='list_users'), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False))
 ] 

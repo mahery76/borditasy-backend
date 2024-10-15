@@ -31,6 +31,7 @@ class Commande(models.Model):
     facture = models.ForeignKey(Facture, on_delete=models.DO_NOTHING)
     produit = models.ForeignKey(Produit, on_delete=models.DO_NOTHING)
 
+
 class User(AbstractUser):
     bio = models.TextField(blank=True, null=True)
     profile_pic = models.ImageField(blank=True, null=True)
@@ -45,4 +46,4 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         # .object not found fixed when adding 'rest_framework.authtoken' to installed app
         Token.objects.create(user=instance)
 
-        # integrity erro when deleting a user from django admin
+        # integrity error when deleting a user from django admin
