@@ -61,7 +61,11 @@ class VerifyTokenView(APIView):
 
     def get(self, request):
         # If the user is authenticated, the token is valid
-        return Response({'valid': True, 'user_id': request.user.id, 'username': request.user.username})
+        return Response({
+            'user_id': request.user.id, 
+            'username': request.user.username,
+            'is_superuser': request.user.is_superuser,
+        }, status=status.HTTP_200_OK)
 
 
 class CreateUserView(APIView):
