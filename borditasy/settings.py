@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
     'borditasyapp',
 ]
 
@@ -116,7 +117,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'borditasy',  # Replace with your database name
         'USER': 'postgres',  # Replace with your database user
-        'PASSWORD': 'hasinjaka',  # Replace with your database password
+        'PASSWORD': 'borditasybd',  # Replace with your database password
         'HOST': 'localhost',  # Replace with your database host, e.g., 'localhost'
         'PORT': '5432',  # Replace with your database port, e.g., '5432'
     }
@@ -163,3 +164,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+   'DEFAULT_PERMISSION_CLASSES': [
+       'rest_framework.permissions.IsAuthenticated',
+   ],
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.SessionAuthentication',
+       'rest_framework.authentication.TokenAuthentication',
+   )
+}
+AUTH_USER_MODEL = 'borditasyapp.User'
