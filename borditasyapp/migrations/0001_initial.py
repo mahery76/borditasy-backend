@@ -27,15 +27,7 @@ class Migration(migrations.Migration):
                 ('quantite_minimum', models.PositiveIntegerField(default=0)),
             ],
         ),
-        migrations.CreateModel(
-            name='PrixProduit',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('prix_produit', models.FloatField()),
-                ('date_prix_produit', models.DateField()),
-                ('produit', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='borditasyapp.produit')),
-            ],
-        ),
+        
         migrations.CreateModel(
             name='Commande',
             fields=[

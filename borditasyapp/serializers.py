@@ -14,12 +14,14 @@ class StockSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class StockListSerializer(serializers.ModelSerializer):
+class StockListSerializer(serializers.Serializer):
     produit = ProduitSerializer(allow_null=True)
+    quantite_stock = serializers.IntegerField()
+    prix_vente = serializers.IntegerField()
 
-    class Meta:
-        model = Stock
-        fields = ['quantite_stock', 'prix_achat_dep', 'prix_vente', 'produit']
+    # class Meta:
+    #     model = Stock
+    #     fields = ['quantite_stock', 'prix_vente', 'produit']
 
 class DepenseSerializer(serializers.ModelSerializer):
     class Meta:
