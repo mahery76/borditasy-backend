@@ -19,7 +19,4 @@ class Migration(migrations.Migration):
                 ('role_user', models.CharField(max_length=255)),
             ],
         ),
-        migrations.DeleteModel(
-            name='PrixProduit',
-        ),
     ]
