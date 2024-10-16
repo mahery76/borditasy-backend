@@ -37,3 +37,27 @@ CREATE VIEW stock_with_remaining AS
                 FROM borditasyapp_commande
                 GROUP BY produit_id) c
             ON s.produit_id = c.produit_id;
+
+
+CREATE OR REPLACE VIEW ProductStatistics AS
+SELECT 
+    p.id AS produit_id,
+    p.nom_produit,
+    COALESCE(SUM(c.qte_produit), 0) AS total_quantity_sold,
+    COALESCE(SUM(c.qte_produit * s.prix_vente), 0) AS total_profit
+FROM 
+    borditasyapp_Produit p
+LEFT JOIN 
+    borditasyapp_Commande c ON p.id = c.produit_id
+LEFT JOIN 
+    borditasyapp_Facture f on f.id=c.facture_id
+LEFT JOIN 
+    borditasyapp_Stock s ON p.id = s.produit_id 
+    AND f.date_facture BETWEEN s.date_stock AND (
+        SELECT MAX(date_stock) 
+        FROM borditasyapp_Stock s2 
+        WHERE s2.produit_id = s.produit_id 
+        AND s2.date_stock >= f.date_facture
+    )
+GROUP BY 
+    p.id, p.nom_produit;
