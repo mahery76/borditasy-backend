@@ -23,6 +23,8 @@ from borditasyapp.views.stockViews import create_stock, list_stock
 from borditasyapp.views.depenseViews import create_depense, list_depense
 
 from borditasyapp.views.commandeViews import create_commande, list_facture_with_commandes
+from borditasyapp.views.statistiqueView import get_product_statistics
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/produits/', create_produit, name='create_produit'),
@@ -34,6 +36,7 @@ urlpatterns = [
     path('api/depenses/list', list_depense, name='list_depenses'),
     path('api/commandes/', create_commande, name='create_commande'),
     path('api/factures/<int:id>', list_facture_with_commandes, name='liste_facture'),
+    path('api/statistics/', get_product_statistics, name='get_product_statistics'),
 ]
 
 
