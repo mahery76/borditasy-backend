@@ -25,8 +25,6 @@ def get_product_statistics(request):
                     c.date_facture BETWEEN %s AND %s
                 GROUP BY 
                     p.id, p.nom_produit
-                
-            
             """,
             [start_date, end_date]
         )

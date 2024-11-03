@@ -54,14 +54,12 @@ urlpatterns = [
     path('api-create-user/', CreateUserView.as_view(), name='api_create_user'),
     path('api-get-all-users/', GetAllUsers.as_view(), name='list_users'), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False))
+    re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False)),
+    path('api/statistics/', get_product_statistics, name='get_product_statistics'),
 ] 
 # if this part is included, it return 404 not found in each request
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
-    path('api/statistics/', get_product_statistics, name='get_product_statistics'),
-]
 
 
 
