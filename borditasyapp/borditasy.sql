@@ -61,3 +61,27 @@ LEFT JOIN
     )
 GROUP BY 
     p.id, p.nom_produit;
+
+
+CREATE OR REPLACE VIEW CommandePrice AS
+            SELECT 
+                c.id AS commande_id,
+                c.produit_id,
+                c.qte_produit,
+                f.date_facture,
+                s.prix_vente,
+                s.prix_achat_dep,
+                COALESCE(s.prix_vente * c.qte_produit, 0) AS total_price
+            FROM 
+                borditasyapp_Commande c
+            JOIN 
+                borditasyapp_Facture f ON c.facture_id = f.id
+            LEFT JOIN 
+                borditasyapp_Stock s ON c.produit_id = s.produit_id 
+            and 
+                s.date_stock = (
+                    SELECT MAX(date_stock) 
+                    FROM borditasyapp_Stock s2 
+                    WHERE s2.produit_id = s.produit_id 
+                    AND s2.date_stock <= f.date_facture
+                );

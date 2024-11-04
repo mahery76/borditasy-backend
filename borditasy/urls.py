@@ -33,7 +33,7 @@ from borditasyapp.views.userViews import UserViewSet, UserLogIn, VerifyTokenView
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 
-from borditasyapp.views.statistiqueView import get_product_statistics
+from borditasyapp.views.statistiqueView import get_product_statistics, get_product_statistics_dashboard
 
 
 urlpatterns = [
@@ -54,14 +54,13 @@ urlpatterns = [
     path('api-create-user/', CreateUserView.as_view(), name='api_create_user'),
     path('api-get-all-users/', GetAllUsers.as_view(), name='list_users'), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False))
+    re_path(r'^$', RedirectView.as_view(url=reverse_lazy('api-root'), permanent=False)),
+    path('api/statistics/', get_product_statistics, name='get_product_statistics'),
+    path('api/statistics/statisticsDashboard', get_product_statistics_dashboard, name='get_product_statistics_dashboard'),
 ] 
 # if this part is included, it return 404 not found in each request
 # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-
-    path('api/statistics/', get_product_statistics, name='get_product_statistics'),
-]
 
 
 
